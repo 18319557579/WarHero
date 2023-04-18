@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "165108254667",
+    "project_id": "warhero-daisy",
+    "storage_bucket": "warhero-daisy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165108254667:android:1799fb2fc2ef6e8595984e",
+        "android_client_info": {
+          "package_name": "com.chestnut.warhero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165108254667-6gakhcadj1fk0r9b164au7f33i6vs2sn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMggIajFqFRbMLua6yrhjPHwXlaSC_DTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165108254667-6gakhcadj1fk0r9b164au7f33i6vs2sn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
