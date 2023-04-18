@@ -3,6 +3,7 @@ package com.chestnut.warhero;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,17 +24,18 @@ public class MainActivity extends AppCompatActivity {
 
         Button crashButton = new Button(this);
         crashButton.setText("Test Crash");
+
+        FirebaseCrashlytics.getInstance().setUserId("daisy" + System.currentTimeMillis());
+
+        FirebaseCrashlytics.getInstance().log("daisy_warhero");
+
         crashButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
                 crashlytics.setCustomKey("my_string_key", "foo" /* string value */);
-
                 crashlytics.setCustomKey("my_bool_key", true /* boolean value */);
-
                 crashlytics.setCustomKey("my_double_key", 1.0 /* double value */);
-
                 crashlytics.setCustomKey("my_float_key", 1.0f /* float value */);
-
                 crashlytics.setCustomKey("my_int_key", 1 /* int value */);
 
                 throw new RuntimeException("Test Crash"); // Force a crash
