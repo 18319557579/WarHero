@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -22,14 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        Button crashButton = new Button(this);
-        crashButton.setText("Test Crash");
-
         FirebaseCrashlytics.getInstance().setUserId("daisy" + System.currentTimeMillis());
 
         FirebaseCrashlytics.getInstance().log("daisy_warhero");
 
-        crashButton.setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.btn_crash)).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
                 crashlytics.setCustomKey("my_string_key", "foo" /* string value */);
@@ -42,8 +40,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addContentView(crashButton, new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        ((Button) findViewById(R.id.btn_not)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    throw new NullPointerException();
+                } catch (Exception e) {
+                    FirebaseCrashlytics.getInstance().recordException(e);
+                    Log.d("Daisy", "不严重：" + e);
+                }
+
+            }
+        });
     }
 }
