@@ -50,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
                     FirebaseCrashlytics.getInstance().recordException(e);
                     Log.d("Daisy", "不严重：" + e);
                 }
+            }
+        });
 
+        ((Button) findViewById(R.id.btn_enable)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
             }
         });
     }

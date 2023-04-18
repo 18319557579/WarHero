@@ -19,4 +19,11 @@
         android:layout_height="wrap_content"
         android:text="上报不严重事件"/>
 
+    <Button
+        android:id="@+id/btn_enable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="打开崩溃上报"/>
+
 </LinearLayout>
