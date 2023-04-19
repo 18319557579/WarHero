@@ -59,5 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
             }
         });
+
+        ((Button) findViewById(R.id.btn_anr)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                while (true) {
+                    Log.d("Daisy", "我就不停的输出");
+                }
+            }
+        });
     }
 }
