@@ -32,5 +32,12 @@
         android:layout_height="wrap_content"
         android:text="手动ANR"/>
 
+    <Button
+        android:id="@+id/btn_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看当前令牌"
+        android:layout_marginTop="20dp"/>
+
 
 </LinearLayout>

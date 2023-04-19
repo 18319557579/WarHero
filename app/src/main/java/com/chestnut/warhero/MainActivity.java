@@ -1,5 +1,6 @@
 package com.chestnut.warhero;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +70,26 @@ public class MainActivity extends AppCompatActivity {
                 while (true) {
                     Log.d("Daisy", "我就不停的输出");
                 }
+            }
+        });
+
+        ((Button) findViewById(R.id.btn_token)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseMessaging.getInstance().getToken()
+                        .addOnCompleteListener(new OnCompleteListener<String>() {
+                            @Override
+                            public void onComplete(@NonNull Task<String> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.w("Daisy", "Fetching FCM registration token failed", task.getException());
+                                    return;
+                                }
+
+                                String token = task.getResult();
+
+                                Log.d("Daisy", "打印Token：" + token);
+                            }
+                        });
             }
         });
     }
