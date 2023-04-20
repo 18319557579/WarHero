@@ -1,9 +1,12 @@
 package com.chestnut.warhero;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,34 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d("Daisy", "回调了onNewIntent");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        Log.d("Daisy", "回调了onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("Daisy", "回调了onStart");
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        Log.d("Daisy", "携带的数据：" + (bundle == null ? "空" : bundle.toString()));
+        Log.d("Daisy", "字符串：" + intent.getStringExtra("name"));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Daisy", "回调了onResume");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
