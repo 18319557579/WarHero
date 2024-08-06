@@ -1,6 +1,8 @@
 package com.example.unityads;
 
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -62,6 +64,13 @@ public class ShowBannersActivity extends AppCompatActivity {
                 topBanner.setListener(bannerListener);
                 topBannerView = findViewById(R.id.rl_top_banner);
                 LoadBannerAd(topBanner, topBannerView);
+
+                topBanner.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LogUtil.d("被点击了");
+                    }
+                });
             }
         });
 
@@ -97,6 +106,8 @@ public class ShowBannersActivity extends AppCompatActivity {
                 hideBottomBannerButton.setEnabled(false);
             }
         });
+
+
     }
 
     private BannerView.IListener bannerListener = new BannerView.IListener() {
@@ -132,5 +143,24 @@ public class ShowBannersActivity extends AppCompatActivity {
         bannerView.load();
         // Associate the banner view object with the banner view:
         bannerLayout.addView(bannerView);
+    }
+
+    public void simulatedClickTop(View view) {
+//        topBanner.performClick();  //只能用于点击事件的分发，但是并不是做到了模拟点击
+        simulateClick(topBanner);
+    }
+
+    /**
+     * 模拟点击
+     * @param view 任意一个控件（View）
+     */
+    public void simulateClick(View view) {
+        long downTime = SystemClock.uptimeMillis();
+        int[] ints = new int[2];
+
+        view.dispatchTouchEvent(MotionEvent.obtain(downTime, downTime, MotionEvent.ACTION_DOWN,
+                ints[0] + 5, ints[1] + 5, 0));
+        view.dispatchTouchEvent(MotionEvent.obtain(downTime + 200, downTime + 200, MotionEvent.ACTION_UP,
+                ints[0] + 5, ints[1] + 5, 0));
     }
 }
