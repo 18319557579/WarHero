@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -16,6 +15,7 @@ import com.unity3d.ads.UnityAdsShowOptions;
 
 public class MainActivity extends LifecycleLogActivity {
     private String adUnitId = "Interstitial_Android";
+    private String adUnitId_IncentiveAdvertising = "Rewarded_Android";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,29 @@ public class MainActivity extends LifecycleLogActivity {
     }
 
     public void playInterstitialAdvertising(View view) {
-        DisplayInterstitialAd();
+        UnityAds.load(adUnitId, new MyUnityAdsLoadListener(adUnitId));
+    }
+
+    public void playIncentiveAdvertising(View view) {
+        UnityAds.load(adUnitId_IncentiveAdvertising, new MyUnityAdsLoadListener(adUnitId_IncentiveAdvertising));
+    }
+
+    class MyUnityAdsLoadListener implements IUnityAdsLoadListener {
+        private String adUnitId;
+
+        public MyUnityAdsLoadListener(String adUnitId) {
+            this.adUnitId = adUnitId;
+        }
+
+        @Override
+        public void onUnityAdsAdLoaded(String placementId) {
+            UnityAds.show(MainActivity.this, adUnitId, new UnityAdsShowOptions(), showListener);
+        }
+
+        @Override
+        public void onUnityAdsFailedToLoad(String placementId, UnityAds.UnityAdsLoadError error, String message) {
+            LogUtil.d("Unity Ads failed to load ad for " + placementId + " with error: [" + error + "] " + message);
+        }
     }
 
     private IUnityAdsLoadListener loadListener = new IUnityAdsLoadListener() {
@@ -70,4 +92,6 @@ public class MainActivity extends LifecycleLogActivity {
     public void DisplayInterstitialAd () {
         UnityAds.load(adUnitId, loadListener);
     }
+
+
 }

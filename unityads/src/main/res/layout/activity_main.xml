@@ -14,4 +14,11 @@
         android:text="播放插页广告"
         android:onClick="playInterstitialAdvertising"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="视频激励广告"
+        android:onClick="playIncentiveAdvertising"/>
+
+
 </LinearLayout>
