@@ -20,5 +20,11 @@
         android:text="视频激励广告"
         android:onClick="playIncentiveAdvertising"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="去Banner广告测试Activity"
+        android:onClick="toBanner"/>
+
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.unityads;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -35,6 +36,10 @@ public class MainActivity extends LifecycleLogActivity {
 
     public void playIncentiveAdvertising(View view) {
         UnityAds.load(adUnitId_IncentiveAdvertising, new MyUnityAdsLoadListener(adUnitId_IncentiveAdvertising));
+    }
+
+    public void toBanner(View view) {
+        startActivity(new Intent(this, ShowBannersActivity.class));
     }
 
     class MyUnityAdsLoadListener implements IUnityAdsLoadListener {
